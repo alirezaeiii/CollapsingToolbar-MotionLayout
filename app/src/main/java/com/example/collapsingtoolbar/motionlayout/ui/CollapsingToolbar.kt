@@ -67,7 +67,7 @@ fun ToolBarExampleDsl(modifier: Modifier = Modifier) {
                 height = Dimension.value(32.dp)
             }
             constrain(button) {
-                top.linkTo(image.bottom, margin = (-23.5).dp)
+                top.linkTo(image.bottom, (-23.5).dp)
                 centerHorizontallyTo(image)
             }
         }
@@ -92,7 +92,7 @@ fun ToolBarExampleDsl(modifier: Modifier = Modifier) {
                 customColor("tint", Color.White)
             }
             constrain(button) {
-                top.linkTo(image.bottom, margin = (-8).dp)
+                top.linkTo(image.bottom, (-8).dp)
                 centerHorizontallyTo(image)
             }
         }
