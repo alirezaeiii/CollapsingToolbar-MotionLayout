@@ -8,11 +8,14 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -39,10 +42,10 @@ import com.example.collapsingtoolbar.motionlayout.R
 @Composable
 fun ToolBarExampleDsl(modifier: Modifier = Modifier) {
     val scroll = rememberScrollState(0)
-    val big = 250.dp
+    val big = 350.dp
     val small = 64.dp
     val scene = MotionScene {
-        val (title, image, icon) = createRefsFor("title", "image", "icon")
+        val (title, image, icon, button) = createRefsFor("title", "image", "icon", "button")
 
         val start1 = constraintSet {
             constrain(title) {
@@ -62,6 +65,10 @@ fun ToolBarExampleDsl(modifier: Modifier = Modifier) {
                 customColor("tint", Color.Black)
                 width = Dimension.value(32.dp)
                 height = Dimension.value(32.dp)
+            }
+            constrain(button) {
+                top.linkTo(image.bottom, margin = (-23.5).dp)
+                centerHorizontallyTo(image)
             }
         }
         val end1 = constraintSet {
@@ -84,6 +91,10 @@ fun ToolBarExampleDsl(modifier: Modifier = Modifier) {
                 customColor("bg", Color.Transparent)
                 customColor("tint", Color.White)
             }
+            constrain(button) {
+                top.linkTo(image.bottom, margin = (-8).dp)
+                centerHorizontallyTo(image)
+            }
         }
         transition(start1, end1, "default") {}
     }
@@ -98,7 +109,7 @@ fun ToolBarExampleDsl(modifier: Modifier = Modifier) {
                 text = LoremIpsum(222).values.first(),
                 modifier = Modifier
                     .background(Color.White)
-                    .padding(16.dp),
+                    .padding(32.dp),
                 color = Color.Black
             )
         }
@@ -147,10 +158,19 @@ fun ToolBarExampleDsl(modifier: Modifier = Modifier) {
         Text(
             modifier = Modifier
                 .layoutId("title")
-                .padding(12.dp),
+                .padding(vertical = 40.dp, horizontal = 12.dp),
             text = "San Francisco",
             fontSize = 30.sp,
             color = Color.White
         )
+        Button(
+            onClick = {},
+            shape = RoundedCornerShape(36.dp),
+            modifier = Modifier
+                .layoutId("button")
+                .width(200.dp)
+        ) {
+            Text(text = "DeepLink")
+        }
     }
 }
